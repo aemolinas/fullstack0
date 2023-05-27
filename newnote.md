@@ -6,33 +6,41 @@ sequenceDiagram
     participant browser
     participant server
 
-    User->>+browser: Submit button
+    User->>browser: Submit button
     
-    browser->>+server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
 
-    browser->>+server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    Note right of browser: The POST request to "new_note" returns HTTP code 302, a redirect to "notes."
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
-    server-->>-browser: HTML file
+    server-->>browser: HTML file
     deactivate server
     
-    browser->>+server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    Note right of browser: Browser parses the head of "notes" and requests main.css and main.js
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
-    server-->>-browser: CSS file
+    server-->>browser: CSS file
     deactivate server 
     
-    browser->>+server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
-    server-->>-browser: JS file
+    server-->>browser: JS file
     deactivate server
-    
-    browser-->>-server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+
+    Note right of browser: The browser executes JavaScript that fetches the JSON file from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>-browser: data.json
+    server-->>browser: data.json
     deactivate server
+
+    Note right of browser: A call back function renders the notes page using the DOM-API with the JSON data
     
-    browser->>+server: GET https://studies.cs.helsinki.fi/favicon.ico
+    browser->>server: GET https://studies.cs.helsinki.fi/favicon.ico
     activate server
-    server-->>-browser: favicon.ico
+    server-->>browser: favicon.ico
     deactivate server
 ```
 ##
