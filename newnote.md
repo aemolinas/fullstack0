@@ -3,19 +3,36 @@
 ```mermaid
 sequenceDiagram
     actor User
-    participant Browser
-    participant Server
-    User->>+Browser: Submit button
-    Browser->>+Server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    Browser->>+Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
-    Server-->>-Browser: HTML file
-    Browser->>+Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    Server-->>-Browser: CSS file 
-    Browser->>+Server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    Server-->>-Browser: JS file
-    Browser-->>-Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
-    Server-->>-Browser: data.json
-    Browser->>+Server: GET https://studies.cs.helsinki.fi/favicon.ico
-    Server-->>-Browser: favicon.ico 
+    participant browser
+    participant server
+
+    User->>+browser: Submit button
+    
+    browser->>+server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+    browser->>+server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>-browser: HTML file
+    deactivate server
+    
+    browser->>+server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>-browser: CSS file
+    deactivate server 
+    
+    browser->>+server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>-browser: JS file
+    deactivate server
+    
+    browser-->>-server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>-browser: data.json
+    deactivate server
+    
+    browser->>+server: GET https://studies.cs.helsinki.fi/favicon.ico
+    activate server
+    server-->>-browser: favicon.ico
+    deactivate server
 ```
 ##

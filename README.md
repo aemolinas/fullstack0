@@ -1,1 +1,1 @@
-# fullstack0
+# Solutions of Full Stack Open Part 0 exercises 
